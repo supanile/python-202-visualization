@@ -1,0 +1,5 @@
+https://www.geeksforgeeks.org/python-matplotlib-an-overview/
+
+https://matplotlib.org/stable/plot_types/index.html
+
+https://docs.mikelopster.dev/c/python-series/202/matplotlib

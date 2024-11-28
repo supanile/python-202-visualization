@@ -1,0 +1,44 @@
+นอกจาก Matplotlib แล้ว ยังมี library อื่น ๆ ที่ได้รับความนิยมในการทำ Data Visualization ใน Python ซึ่งแต่ละตัวมีคุณสมบัติพิเศษและฟีเจอร์ที่เหมาะสมกับการใช้งานที่หลากหลาย ต่อไปนี้เป็น library ที่น่าสนใจ
+
+1. Seaborn — https://seaborn.pydata.org/
+
+รายละเอียด: สร้างขึ้นบน Matplotlib แต่เพิ่มความสามารถในการทำกราฟที่ซับซ้อนขึ้น เช่น การวิเคราะห์ข้อมูลเชิงสถิติ และการสร้าง Heatmap, Pairplot, Violin Plot ได้อย่างง่ายดาย
+การใช้งาน: เหมาะกับการทำกราฟที่ต้องการความซับซ้อนทางสถิติ และทำให้กราฟดูมีความสวยงามเป็นพิเศษ
+import seaborn as sns
+sns.lineplot(x='Date', y='Value', data=data)
+
+2. Plotly — https://plotly.com/
+
+รายละเอียด: เป็น library สำหรับการสร้างกราฟแบบโต้ตอบได้ (interactive) สามารถขยายหรือเลื่อนดูข้อมูลได้ในกราฟ เหมาะกับการนำเสนอข้อมูลในเว็บหรือแอปพลิเคชัน
+การใช้งาน: เหมาะสำหรับการสร้างกราฟที่สามารถโต้ตอบได้ เช่น การสร้าง dashboard หรือแอปพลิเคชันที่ต้องการความ interactive
+import plotly.express as px
+fig = px.line(data, x='Date', y='Value', title='Interactive Line Plot')
+fig.show()
+
+3. Bokeh — https://bokeh.org/
+
+รายละเอียด: library ที่เน้นการสร้างกราฟแบบโต้ตอบได้ในเว็บบราวเซอร์โดยตรง รองรับการสร้างกราฟแบบมีปฏิสัมพันธ์ได้คล้ายกับ Plotly แต่มีฟีเจอร์เฉพาะตัว เช่น สามารถแทรกกราฟลงในเว็บ HTML ได้ง่าย
+การใช้งาน: เหมาะกับการสร้างกราฟเชิงโต้ตอบในเว็บแอปพลิเคชันหรือการแสดงผลข้อมูลแบบเรียลไทม์
+from bokeh.plotting import figure, show
+from bokeh.io import output_notebook
+
+output_notebook()
+p = figure(x_axis_type="datetime", title="Time Series Data", plot_width=800)
+p.line(data['Date'], data['Value'], line_width=2)
+show(p)
+
+ggplot (Plotnine) — https://plotnine.org/
+รายละเอียด: พัฒนามาจาก ggplot2 ใน R เป็นการทำกราฟที่ใช้ syntax แบบ grammar of graphics ซึ่งช่วยให้การทำกราฟซับซ้อนทำได้เป็นระบบมากขึ้น
+การใช้งาน: เหมาะสำหรับคนที่คุ้นเคยกับ ggplot2 ใน R และต้องการใช้งานใน Python
+from plotnine import ggplot, aes, geom_line
+ggplot(data, aes(x='Date', y='Value')) + geom_line()
+
+Geopandas + Folium — https://geopandas.org/en/stable/
+รายละเอียด: ใช้สำหรับการสร้างแผนที่และการแสดงข้อมูลเชิงภูมิศาสตร์ สามารถเชื่อมต่อกับข้อมูลพิกัดและข้อมูลเชิงภูมิศาสตร์เพื่อสร้างแผนที่โต้ตอบได้
+การใช้งาน: เหมาะสำหรับการทำงานที่เกี่ยวข้องกับข้อมูลเชิงภูมิศาสตร์ เช่น การสร้าง Heatmap บนแผนที่
+import geopandas as gpd
+import folium
+world = gpd.read_file(gpd.datasets.get_path('naturalearth_lowres'))
+m = folium.Map(location=[20, 0], zoom_start=2)
+folium.Choropleth(geo_data=world).add_to(m)
+m
